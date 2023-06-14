@@ -5,24 +5,33 @@ public class CircularMoving : MonoBehaviour
     public float speed = 2f; // Speed of rotation
     public float radius = 2f; // Radius of circle
     public Vector3 center; // Center of circle
-    public float rotationSpeed = 1;
+    public float rotationSpeed = 2;
 
-    public float angle; // Current angle
+    public float degAngle;
 
     void Start()
     {
-        
+        Application.targetFrameRate = 60;
     }
 
     void Update()
     {
-        var a = angle * 180 / Mathf.PI;
-        angle += speed * Time.deltaTime;
-    // Increment angle based on speed and time
-        Vector3 offset = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * radius; // Calculate offset based on angle and 
-        transform.position = center + offset; // Set position to center plus offset
-        transform.RotateAround(center, Vector3.up, a);
+        var angle = degAngle;
+        Vector3 offset = new Vector3(Mathf.Sin(DegToRad(angle)) * radius, 0, Mathf.Cos(DegToRad(angle)) * radius);
+        transform.position = center + offset; 
+        transform.RotateAround(center, Vector3.up, rotationSpeed);
+        if (degAngle == 358)
+        {
+            degAngle = 0;
+        }
+        else
+        {
+            degAngle += rotationSpeed;
+        }
+    }
 
-        //transform.RotateAround(center, Vector3.up, rotationSpeed * Time.deltaTime);
+    private float DegToRad(float deg)
+    {
+        return deg * Mathf.PI / 180;
     }
 }
