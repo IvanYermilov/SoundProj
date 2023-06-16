@@ -20,7 +20,7 @@ public class CircularMoving : MonoBehaviour
         Vector3 offset = new Vector3(Mathf.Sin(DegToRad(angle)) * radius, 0, Mathf.Cos(DegToRad(angle)) * radius);
         transform.position = center + offset; 
         transform.RotateAround(center, Vector3.up, rotationSpeed);
-        if (degAngle == 358)
+        if (degAngle == 359.5)
         {
             degAngle = 0;
         }
